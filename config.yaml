@@ -1,0 +1,11 @@
+root_paths:
+  - O:\VMs\X\torrents\movies
+  - O:\VMs\X\torrents\shows
+  - O:\VMs\Z\torrents\shows
+  #- Y:\torrents\shows
+string_list:
+  - 1080p
+  - DVDRip
+  - 720p
+  - 2160p
+  - WEB-DL

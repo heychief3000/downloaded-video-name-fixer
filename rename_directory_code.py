@@ -1,9 +1,12 @@
 #Jonathan Westlake
 #1/30/21
-#JW
+#Rename Directory Code Init Checkin for Reference.
+#Version 0.1
+
 import os
 import re
 import traceback
+import yaml
 #import MediaInfo
 #import magic
 import mimetypes
@@ -13,26 +16,13 @@ from e_enums import *
 class ProcessData:
     def __init__(self):
 
-        # Old
-        # self.paths = [r"X:\torrents\movies",
-        #               r"X:\torrents\shows",
-        #               r"Y:\torrents\shows",
-        #               r"Z:\torrents\shows"]
+        # Load YAML file into a dictionary
+        with open('config.yaml', 'r') as f:
+            config = yaml.safe_load(f)
 
+        self.root_paths = config['root_paths']
+        self.string_list = config['string_list']
 
-        # 1/16/23
-        self.root_paths = [r"O:\VMs\X\torrents\movies",
-                      r"O:\VMs\X\torrents\shows",
-                           #r"Y:\torrents\shows",
-                      r"O:\VMs\Z\torrents\shows"]
-
-        #self.root_paths = [r"O:\VMs\Z\torrents\01_SampleData"] #Debug
-
-
-        # self.paths = [
-        #               r"Z:\torrents\shows"]
-
-        self.string_list = ["1080p", "DVDRip", "720p", "2160p", "WEB-DL"]
 
     def findStringsTypeIndex(self, f):
 
@@ -98,6 +88,7 @@ class ProcessData:
         season_str = dir[str_s + 1: str_e].lower()  # Add 1 to remove the 's'
         folder_str = dir[0:str_s - 1]
         season_num = season_str.split("e")[0]
+        season_num = int(season_num) #This changes 01 to 1, Used by Sonar so I'm going this direction.
         season_folder = f"Season {season_num}"
 
         print(f"Reg1 - Show Match Found: ({folder_str}) :::::: ({season_str}) :::: ({season_folder})")
